@@ -21,5 +21,19 @@ class Article_model extends CI_Model {
         }
         return $news;
     }
+    
+    function get_art($id) {
+        $news = "";
+        $content = 'Select * from article WHERE id=' . $id;
+        $query = $this->db->query($content);
+        foreach ($query->result() as $row) {
+            $news['id'] = $row->id;
+            $news['small_image_png'] = $row->small_image_png;
+            $news['large_image_png'] = $row->large_image_png;
+            $news['title'] = $row->title;
+            $news['content'] = $row->content;
+        }
+        return $news;
+    }
 
 }
