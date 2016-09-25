@@ -6,11 +6,15 @@ class Statistics_model extends CI_Model {
         // Call the Model constructor
         parent::__construct();
     }
-    
+
     function get_statistics($season) {
         $statistics = "";
         $counter = 0;
-        $content = 'Select * from statistics WHERE season="' . $season . '"';
+        $content = 'SELECT statistics.*, roster.image ' .
+                'FROM statistics ' .
+                'LEFT JOIN roster ' .
+                'ON statistics.number = roster.number ' .
+                'WHERE statistics.season = "' . $season . '"';
         $query = $this->db->query($content);
         foreach ($query->result() as $row) {
             $statistics[$counter]['id'] = $row->id;
@@ -30,6 +34,7 @@ class Statistics_model extends CI_Model {
             $statistics[$counter]['stl'] = $row->stl;
             $statistics[$counter]['turnovers'] = $row->turnovers;
             $statistics[$counter]['pf'] = $row->pf;
+            $statistics[$counter]['image'] = $row->image;
             $counter++;
         }
         return $statistics;

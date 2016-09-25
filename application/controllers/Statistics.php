@@ -5,7 +5,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Statistics extends CI_Controller {
 
     function index() {
-        
     }
     
     public function GetStatistics($season) {
