@@ -10,16 +10,13 @@ class Players_model extends CI_Model {
     function get_players() {
         $counter = 0;
         $players = "";
-        $query = $this->db->query('Select id, name, position, number, image, date_of_birth, weight, height, country from roster');
+        $query = $this->db->query('Select id, name, position, number, image from roster');
         foreach ($query->result() as $row) {
             $players[$counter]['id'] = $row->id;
             $players[$counter]['name'] = $row->name;
+            $players[$counter]['position'] = $row->position;
             $players[$counter]['number'] = $row->number;
             $players[$counter]['image'] = $row->image;
-            $players[$counter]['date_of_birth'] = $row->date_of_birth;
-            $players[$counter]['weight'] = $row->weight;
-            $players[$counter]['height'] = $row->height;
-            $players[$counter]['country'] = $row->country;
             $counter++;
         }
         return $players;
@@ -32,6 +29,7 @@ class Players_model extends CI_Model {
         foreach ($query->result() as $row) {
             $player['id'] = $row->id;
             $player['name'] = $row->name;
+            $player['position'] = $row->position;
             $player['number'] = $row->number;
             $player['image'] = $row->image;
             $player['date_of_birth'] = $row->date_of_birth;
